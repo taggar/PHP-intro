@@ -26,7 +26,6 @@
 
     $curl = curl_init();
 
-
     ?>
 
     <div class="container-fluid mt-3 pt-5">
@@ -46,7 +45,7 @@
 
                 <li>Link using POST:
                     <form action="result.php/" method="post">
-                        <input type="text" name="tvshows" id="tvshows" value="'The Bridge', 'The Fall' , 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
+                        <input type="text" name="tvshows" id="tvshows" value="'The Bridge','The Fall', 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
                         <input type="text" name="movies" id="movies" value="'The Aristocats', 'Sleepless in Seattle' , 'Into the Wild' , 'The Negotiator' , 'Titanic'">
                         <button type="submit">Submit POST</button>
                     </form>
