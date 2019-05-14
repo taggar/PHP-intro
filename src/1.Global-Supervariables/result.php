@@ -24,33 +24,17 @@
     <div class="container-fluid mt-3 p-5 pt-5">
         <?php
 
-        function printValues($input)
-        {
-            print "<div class=\"card\"> <div class=\"card-body\">";
-            if (is_array($input)) {
-                foreach ($input as $key => $value) {
-                    print("<pre>{$key} = {$value}</pre>");
-                    if (is_array($value)) {
-                        printValues($value);
-                    }
-                }
-            } else {
-                if ($input != null) {
-                    print("Not an array: {$input} \n");
-                } else {
-                    print("Found null. \n");
-                }
-            }
-            print "</div> </div>";
-        }
+        require "printvalues.php";
 
-        echo "<h1>" . ' $_POST' . "</h1>";
+        $data_object = json_decode('{}', true);
+
+        echo   "<h1>" . ' $_POST' .   " </h1>";
         printValues($_POST);
-        $postObject = (object)$_POST;
+        $data_object["postObject"] = (object)$_POST;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // output as key value table
-            print "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
+            print   "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
             foreach ($_POST as $key => $value) {
                 print("<tr><td>{$key}</td><td>{$value}</td></tr>");
             }
@@ -73,7 +57,7 @@
 
         echo "<h1> "  . ' $_GET' . "</h1>";
         printValues($_GET);
-        $getObject = (object)$_GET;
+        $data_object["getObject"] = (object)$_GET;
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             print "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
@@ -99,34 +83,31 @@
 
         echo "<h1>" . '$_SERVER' . "</h1>";
         printValues($_SERVER);
-        $serverObject = (object)$_SERVER;
+        $data_object["serverObject"] = (object)$_SERVER;
 
 
         echo "<h1>" . '$_REQUEST' . "</h1>";
         printValues($_REQUEST);
-        $requestObject = (object)$_REQUEST;
+        $data_object['requestObject'] = (object)$_REQUEST;
 
 
         echo "<h1>" . ' $_FILES' . " </h1>";
         printValues($_FILES);
-        $filesObject = (object)$_FILES;
+        $data_object['filesObject'] = (object)$_FILES;
 
 
         echo "<h1>" . ' $_ENV' . " </h1>";
         printValues($_ENV);
-        $envObject = (object)$_ENV;
+        $data_object['envObject'] = (object)$_ENV;
 
 
         echo "<h1>" . ' $_COOKIE' . " </h1>";
         printValues($_COOKIE);
-        $cookieObject = (object)$_COOKIE;
+        $data_object['cookieObject'] = (object)$_COOKIE;
 
-        $tvshows = array("The Bridge", "The Fall", "La Casa De Papel", "Homeland", "Revenge", "De Dag");
-
-        echo "<h1>" . ' $_SESSION' . " </h1>";
+        $_SESSION['data_object'] = $data_object;
+        print("<h1><a href=\"superdata.php\">" . '$_SESSION' . "</a></h1>");
         printValues($_SESSION);
-
-        print("{$_SESSION['tvshows']}");
 
         // $superglobals = array($_SERVER, $_REQUEST, $_POST, $_GET, $_FILES, $_ENV, $_COOKIE, $_SESSION);
 

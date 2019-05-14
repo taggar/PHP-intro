@@ -1,3 +1,10 @@
+<?php session_start();
+
+$tvshows = ["The Bridge", "The Fall", "La Casa De Papel", "Homeland", "Revenge", "De Dag"];
+
+$movies = ["The Aristocats", "Sleepless in Seattle", "Into the Wild", "The Negotiator", "Titanic"];
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,41 +25,35 @@
     </header>
 
 
-    <?php
-
-    $tvshows = array("The Bridge", "The Fall", "La Casa De Papel", "Homeland", "Revenge", "De Dag");
-
-    $movies = array("The Aristocats", "Sleepless in Seattle", "Into the Wild", "The Negotiator", "Titanic");
-
-    $curl = curl_init();
-
-    ?>
 
     <div class="container-fluid mt-3 pt-5">
 
-        <h2>A simple page</h1>
 
-            <p>This page just needs to allow submitting some form data; one set of data to be sent with GET method, and one with POST method.</p>
 
-            <ul>
-                <li>Link using GET:
-                    <form action="result.php" method="get">
-                        <input type="text" name="favCountry" id="favCountry" value="Sweden">
-                        <input type="text" name="worstMovie" id="worstMovie" value="I don't remember what I did last summer">
-                        <button type="submit">Submit GET</button>
-                    </form>
-                    <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry=" Sweden"&worstMovie="I don't remember what I did last summer" </a> </li>
+        <h1>A simple page for a POST and a GET</h1>
 
-                <li>Link using POST:
-                    <form action="result.php/" method="post">
-                        <input type="text" name="tvshows" id="tvshows" value="'The Bridge','The Fall', 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
-                        <input type="text" name="movies" id="movies" value="'The Aristocats', 'Sleepless in Seattle' , 'Into the Wild' , 'The Negotiator' , 'Titanic'">
-                        <button type="submit">Submit POST</button>
-                    </form>
+        <p>This page just needs to allow submitting some form data; one set of data to be sent with GET method, and one with POST method.</p>
 
-                </li>
-            </ul>
+        <ul>
+            <li>Link using GET:
+                <form action="result.php" method="get">
+                    <input type="text" name="favCountry" id="favCountry" value="Sweden">
+                    <input type="text" name="worstMovie" id="worstMovie" value="I don't remember what I did last summer">
+                    <button type="submit">Submit GET</button>
+                </form>
+                <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry=" Sweden"&worstMovie="I don't remember what I did last summer" </a> </li>
+
+            <li>Link using POST:
+                <form action="result.php" method="post">
+                    <input type="text" name="tvshows" id="tvshows" value="'The Bridge','The Fall', 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
+                    <input type="text" name="movies" id="movies" value="'The Aristocats', 'Sleepless in Seattle' , 'Into the Wild' , 'The Negotiator' , 'Titanic'">
+                    <button type="submit">Submit POST</button>
+                </form>
+
+            </li>
+        </ul>
     </div>
+
 </body>
 
 </html>

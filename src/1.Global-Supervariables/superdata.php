@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,31 +21,24 @@
     <div class="container-fluid mt-3 p-5 pt-5">
         <?php
 
-        function printValues($input)
-        {
-            print "<div class=\"card\"> <div class=\"card-body\">";
-            if (is_array($input)) {
-                foreach ($input as $key => $value) {
-                    print("<pre>{$key} = {$value}</pre>");
-                    if (is_array($value)) {
-                        printValues($value);
-                    }
-                }
-            } else {
-                if ($input != null) {
-                    print("Not an array: {$input} \n");
-                } else {
-                    print("Found null. \n");
-                }
-            }
-            print "</div> </div>";
-        }
+        require "printvalues.php";
+
         echo "<h1>" . ' $_SESSION' . " </h1>";
+
+        echo "<h2>Output from var_dump</h2>";
+        echo "<pre>";
+        var_dump($_SESSION);
+        echo "</pre>";
+
+        echo "<h2>Output from printValues</h2>";
+
         printValues($_SESSION);
 
+        session_unset();
+
+        session_destroy();
 
         ?>
-
     </div>
 </body>
 
