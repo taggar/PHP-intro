@@ -32,26 +32,58 @@ $movies = ["The Aristocats", "Sleepless in Seattle", "Into the Wild", "The Negot
 
         <h1>A simple page for a POST and a GET</h1>
 
+        <p>Hello <?php echo $_SESSION['userName'] ?>! </p>
+
         <p>This page just needs to allow submitting some form data; one set of data to be sent with GET method, and one with POST method.</p>
 
-        <ul>
-            <li>Link using GET:
+        <div class="card">
+            <div class="card-body">
+                <h2>Try GET</h2>
+
                 <form action="result.php" method="get">
-                    <input type="text" name="favCountry" id="favCountry" value="Sweden">
-                    <input type="text" name="worstMovie" id="worstMovie" value="I don't remember what I did last summer">
-                    <button type="submit">Submit GET</button>
-                </form>
-                <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry=" Sweden"&worstMovie="I don't remember what I did last summer" </a> </li>
 
-            <li>Link using POST:
+                    <div class="form-group">
+                        <label for="favCountry">Favourite country: </label>
+                        <input class="form-control" type="text" name="favCountry" id="favCountry" value="Sweden">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="worstMovie">Worst movie ever seen: </label>
+                        <input class="form-control" type="text" name="worstMovie" id="worstMovie" value="I don't remember what I did last summer">
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Submit GET</button>
+
+                </form>
+
+                <p>Or just a link with the query, like this:<br>
+                    <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry=" Sweden"&worstMovie="I don't remember what I did last summer" </a></p>
+
+            </div>
+        </div>
+
+        <div class="card mt-3 mb-5">
+            <div class="card-body">
+                <h2>Try POST</h2>
+
                 <form action="result.php" method="post">
-                    <input type="text" name="tvshows" id="tvshows" value="'The Bridge','The Fall', 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
-                    <input type="text" name="movies" id="movies" value="'The Aristocats', 'Sleepless in Seattle' , 'Into the Wild' , 'The Negotiator' , 'Titanic'">
-                    <button type="submit">Submit POST</button>
+
+                    <div class="form-group">
+                        <label for="tvshows">Five favourite tv shows: </label>
+                        <input class="form-control" type="text" name="tvshows" id="tvshows" value="'The Bridge','The Fall', 'La Casa De Papel' , 'Homeland' , 'Revenge' , 'De Dag'">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="movies">Five favourite movies: </label>
+                        <input class="form-control" type="text" name="movies" id="movies" value="'The Aristocats', 'Sleepless in Seattle' , 'Into the Wild' , 'The Negotiator' , 'Titanic'">
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Submit POST</button>
+
                 </form>
 
-            </li>
-        </ul>
+            </div>
+        </div>
     </div>
 
 </body>
