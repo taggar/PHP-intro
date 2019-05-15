@@ -45,16 +45,24 @@ $array = [
             </thead>
             <tbody>
                 <?php
-                foreach ($array as $item) {
-                    print("<tr>
-                    <td><a href=\"https://www.google.be/search?q={$item['tv-show']}+tv-show\">{$item['tv-show']}</a></td>
-                    <td>");
-                    for ($i = 0; $i < $item['rating']; $i++) {
-                        print("<img src=\"icons8-star-24.png\">");
-                    }
-                    print("</td></tr>");
-                }
-                ?>
+                foreach ($array as $item) { ?>
+                    <tr>
+                        <td>
+                            <a href="https://www.google.be/search?q=<?php echo $item['tv-show']; ?>+tv-show">
+                                <?php echo $item['tv-show']; ?></a>
+                        </td>
+                        <td>
+                            <?php
+                            for ($i = 0; $i < $item['rating']; $i++) { ?>
+                                <img src="icons8-star-24.png" alt="Star">
+                            <?php
+                        }
+                        ?>
+                        </td>
+                    </tr>
+                <?php
+            }
+            ?>
             </tbody>
         </table>
 
