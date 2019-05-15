@@ -30,38 +30,38 @@ if (isset($_POST["reset"])) {
         <h1>Lottery Machine</h1>
 
         <form method="post">
-            <button type="submit" name="submit">Roll the dice ...</button>
+            <div class="form-check form-check-inline mx-auto">
+                <input type="radio" name="pic" value="0" class="m-3"><img src="pizza.png" alt="pizza">
+                <input type="radio" name="pic" value="1" class="m-3"><img src="hamburger.png" alt="hamburger">
+                <input type="radio" name="pic" value="2" class="m-3"><img src="fries.png" alt="fries">
+            </div>
+            <button type="submit" name="submit">Guess which ...</button>
         </form>
 
-        <div>
-            <table class="table table-sm table-bordered w-50 mx-auto pt-5">
-                <tbody>
-                    <tr>
-                        <?php
-                        $row = [];
-                        if (isset($_POST["submit"])) {
-                            for ($i = 0; $i < 3; $i++) {
-                                $rand = random_int(0, 2);
-                                print("<td><img src=\"{$icons[$rand]}\"></td>");
-                                array_push($row, $rand);
-                            }
-                        }
-                        ?>
-                    </tr>
-                </tbody>
-            </table>
 
-            <?php
-            if (sizeof(array_unique($row)) == 1) {
-                print("<div class=\"alert alert-success px-3\" role=\"alert\">
-                                    We have a WINNER!
-                                    </div>");
+        <?php
+        if (isset($_POST["submit"])) {
+            $rand = random_int(0, 2);
+            $computer = $icons[$rand];
+
+            if ($_POST['pic'] == $rand) {
+                print("<div class=\"alert alert-success px-3 mt-5\" role=\"alert\">
+                                        We have a WINNER!<br>
+                                        I also picked <img src=\"{$computer}\">.
+                                        </div>");
                 print("<form method=\"post\">
-            <button type=\"submit\" name=\"reset\">Play again</button>
-        </form>");
+                <button type=\"submit\" name=\"reset\">Play again</button>
+                </form>");
+            } else {
+                print("<div class=\"alert alert-warning px-3\" role=\"alert\">
+                        Nope, try again ... My pick was this one:
+                        <img src=\"{$computer}\">
+                        </div>");
             }
-            ?>
-        </div>
+        }
+
+        ?>
+    </div>
 
 
     </div>
