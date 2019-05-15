@@ -1,10 +1,4 @@
-<?php session_start();
-
-$tvshows = ["The Bridge", "The Fall", "La Casa De Papel", "Homeland", "Revenge", "De Dag"];
-
-$movies = ["The Aristocats", "Sleepless in Seattle", "Into the Wild", "The Negotiator", "Titanic"];
-
-?>
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,11 +18,7 @@ $movies = ["The Aristocats", "Sleepless in Seattle", "Into the Wild", "The Negot
         </nav>
     </header>
 
-
-
     <div class="container-fluid mt-3 pt-5">
-
-
 
         <h1>A simple page for a POST and a GET</h1>
 

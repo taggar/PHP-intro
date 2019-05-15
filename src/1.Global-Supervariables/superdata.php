@@ -23,14 +23,14 @@
 
         require "printvalues.php";
 
-        echo "<h1>" . ' $_SESSION' . " </h1>";
+        echo ("<h1>" . ' $_SESSION' . " </h1>");
 
-        echo "<h2>Output from var_dump</h2>";
-        echo "<pre>";
+        echo ("<h2>Output from var_dump</h2>");
+        echo ("<pre>");
         var_dump($_SESSION);
-        echo "</pre>";
+        echo ("</pre>");
 
-        echo "<h2>Output from printValues</h2>";
+        echo ("<h2>Output from printValues</h2>");
 
         printValues($_SESSION);
 

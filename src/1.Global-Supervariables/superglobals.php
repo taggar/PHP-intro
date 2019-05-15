@@ -11,43 +11,35 @@
 <body>
 
     <?php
-    $superglobals = array($_SERVER, $_REQUEST, $_POST, $_GET, $_FILES, $_ENV, $_COOKIE, $_SESSION);
 
-
-    echo "<h1>" . '$_SERVER' . "</h1>";
+    echo ("<h1>" . '$_SERVER' . "</h1>");
     printValues($_SERVER);
-    echo "<h1>" . '$_REQUEST' . "</h1>";
+    echo ("<h1>" . '$_REQUEST' . "</h1>");
     printValues($_REQUEST);
-    echo "<h1>" . ' $_POST' . "</h1>";
+    echo ("<h1>" . ' $_POST' . "</h1>");
     printValues($_POST);
-    echo "<h1>" . ' $_GET' . "</h1>";
+    echo ("<h1>" . ' $_GET' . "</h1>");
     printValues($_GET);
-    echo "<h1>" . ' $_FILES' . " </h1>";
+    echo ("<h1>" . ' $_FILES' . " </h1>");
     printValues($_FILES);
-    echo "<h1>" . ' $_ENV' . " </h1>";
+    echo ("<h1>" . ' $_ENV' . " </h1>");
     printValues($_ENV);
-    echo "<h1>" . ' $_COOKIE' . " </h1>";
+    echo ("<h1>" . ' $_COOKIE' . " </h1>");
     printValues($_COOKIE);
-    echo "<h1>" . ' $_SESSION' . " </h1>";
+    echo ("<h1>" . ' $_SESSION' . " </h1>");
     printValues($_SESSION);
-
-
-
-    // foreach ($superglobals as $key) {
-    //     printValues($key);
-    // }
 
     function printValues($input)
     {
         if (is_array($input)) {
-            print "<pre>----------------------------------------------------------</pre>";
+            print("<pre>----------------------------------------------------------</pre>");
             foreach ($input as $key => $value) {
                 print("<pre>{$key} = {$value}</pre>");
                 if (is_array($value)) {
                     printValues($value);
                 }
             }
-            print "<pre>----------------------------------------------------------</pre>";
+            print("<pre>----------------------------------------------------------</pre>");
         } else {
             print("{$input} \n");
         }

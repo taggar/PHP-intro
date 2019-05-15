@@ -3,6 +3,7 @@ session_start();
 
 $userName = "Raf";
 $password = "pass";
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['userName'] != null) {
     if ($_POST['userName'] == $userName && $_POST['password'] == $password) {
         $_SESSION['userName'] = $userName;
@@ -30,8 +31,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['userName'] != null) {
             <span class="navbar-brand">PHP Intro: <?php echo $_SERVER['SCRIPT_FILENAME'] ?></span>
         </nav>
     </header>
-
-
 
     <div class="container-fluid mt-3 pt-5">
 
