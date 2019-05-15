@@ -2,7 +2,7 @@
 $icons = ["pizza.png", "hamburger.png", "fries.png"];
 
 if (isset($_POST["reset"])) {
-    header("Location: slottery.php");
+    header("Location: lottery.php");
     exit;
 }
 ?>
