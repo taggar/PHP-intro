@@ -26,11 +26,11 @@
 
         require "printvalues.php";
 
-        $data_object = json_decode('{}', true);
+        $data_object = new stdClass();
 
         echo   "<h1>" . ' $_POST' .   " </h1>";
         printValues($_POST);
-        $data_object["postObject"] = (object)$_POST;
+        $data_object->postObject = (object)$_POST;
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             // output as key value table
@@ -57,7 +57,7 @@
 
         echo "<h1> "  . ' $_GET' . "</h1>";
         printValues($_GET);
-        $data_object["getObject"] = (object)$_GET;
+        $data_object->getObject = (object)$_GET;
 
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             print "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
@@ -83,27 +83,27 @@
 
         echo "<h1>" . '$_SERVER' . "</h1>";
         printValues($_SERVER);
-        $data_object["serverObject"] = (object)$_SERVER;
+        $data_object->serverObject = (object)$_SERVER;
 
 
         echo "<h1>" . '$_REQUEST' . "</h1>";
         printValues($_REQUEST);
-        $data_object['requestObject'] = (object)$_REQUEST;
+        $data_object->requestObject = (object)$_REQUEST;
 
 
         echo "<h1>" . ' $_FILES' . " </h1>";
         printValues($_FILES);
-        $data_object['filesObject'] = (object)$_FILES;
+        $data_object->filesObject = (object)$_FILES;
 
 
         echo "<h1>" . ' $_ENV' . " </h1>";
         printValues($_ENV);
-        $data_object['envObject'] = (object)$_ENV;
+        $data_object->envObject = (object)$_ENV;
 
 
         echo "<h1>" . ' $_COOKIE' . " </h1>";
         printValues($_COOKIE);
-        $data_object['cookieObject'] = (object)$_COOKIE;
+        $data_object->cookieObject = (object)$_COOKIE;
 
         $_SESSION['data_object'] = $data_object;
         print("<h1><a href=\"superdata.php\">" . '$_SESSION' . "</a></h1>");
