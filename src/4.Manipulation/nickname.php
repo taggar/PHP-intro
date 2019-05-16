@@ -57,10 +57,10 @@ function randomColor()
 function colorize($input)
 {
     $newStr = '';
-    $length   = mb_strlen($input);
+    $strArr = preg_split("//u", $input);
 
-    for ($i = 0; $i < $length - 1; $i++) {
-        $newStr .= "<span style=\"color: " . randomcolor() . "\">" . $input[$i] . "</span>";
+    foreach ($strArr as $char) {
+        $newStr .= "<span style=\"color: " . randomcolor() . "\">" . $char . "</span>";
     }
 
     return $newStr;
