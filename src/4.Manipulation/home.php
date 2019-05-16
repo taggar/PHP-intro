@@ -1,11 +1,43 @@
 <?php
 session_start();
-$anArray = [];
+$anArray = ["Seed"];
 $_SESSION['simpleArray'] = $anArray;
-$anAssocArray = [];
+$anAssocArray = ["Seed" => "Seed"];
 $_SESSION['assocArray'] = $anAssocArray;
 $anObject = new stdClass();
+$anObject->seed = "Seed";
 $_SESSION['anObject'] = $anObject;
+
+function is_assoc2(&$array)
+{
+    if (!is_array($array)) return false;
+    $i = count($array);
+    while ($i > 0) {
+        if (!isset($array[--$i])) return true;
+    }
+    return false;
+}
+
+foreach ($_SESSION as $member => $value) {
+    $valueToAdd = "Added by loop";
+    if (is_array($value)) {
+        if (is_assoc2($value)) {
+            $value["AddedByLoop"] = $valueToAdd;
+        } else {
+            array_push($value, $valueToAdd);
+        }
+    } else {
+        $value->addedByLoop = $valueToAdd;
+    }
+}
+
+$randomKey = rand(0, count($anArray));
+echo ("Random key is {$randomKey}");
+if ($randomKey <= count(array_keys($anArray))) {
+    $theKey = array_keys($anArray)[$randomKey];
+    echo (" Random key is {$theKey}");
+    $anArray[$theKey] = "This value was randomly changed";
+}
 
 ?>
 <!DOCTYPE html>
