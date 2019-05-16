@@ -1,5 +1,71 @@
 <?php
 session_start();
+
+function mb_strrev($string, $encoding = null)
+{
+    if ($encoding === null) {
+        $encoding = mb_detect_encoding($string);
+    }
+
+    $length   = mb_strlen($string, $encoding);
+    $reversed = '';
+    while ($length-- > 0) {
+        $reversed .= mb_substr($string, $length, 1, $encoding);
+    }
+
+    return $reversed;
+}
+
+function randPrefix($counter)
+{
+    $prefix = '';
+    for ($i = 0; $i < $counter; $i++) {
+        $letter = chr(rand(97, 122));
+        $prefix .= $letter;
+    }
+    return $prefix;
+}
+
+echo ("Prefix: " . randPrefix(4));
+
+function randomCap($str)
+{
+    $newStr = '';
+    $randomPos = rand(0, mb_strlen($str) - 1);
+    $randomChar = $str[$randomPos];
+    while (!ctype_alpha($randomChar)) {
+        $randomPos = rand(0, mb_strlen($str) - 1);
+        $randomChar = $str[$randomPos];
+    }
+    if (ctype_lower($randomChar)) {
+        $newStr = substr_replace($str, mb_strtoupper($randomChar), $randomPos, 1);
+    } else {
+        $newStr = substr_replace($str, mb_strtolower($randomChar), $randomPos, 1);
+    }
+    return $newStr;
+}
+
+function randomColor()
+{
+    $color = '#';
+    for ($i = 0; $i < 3; $i++) {
+        $color .= str_pad(dechex(mt_rand(0, 255)), 2, '0', STR_PAD_LEFT);
+    }
+    return $color;
+}
+
+function colorize($input)
+{
+    $newStr = '';
+    $length   = mb_strlen($input);
+
+    for ($i = 0; $i < $length - 1; $i++) {
+        $newStr .= "<span style=\"color: " . randomcolor() . "\">" . $input[$i] . "</span>";
+    }
+
+    return $newStr;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +95,40 @@ session_start();
             <button type="submit" class="btn btn-primary" disabled="disabled">Submit</button>
         </form>
 
+
+
+        <?php
+        if ($_REQUEST['aName'] != null) {
+            $name = $_REQUEST['aName'];
+            $reversed = mb_strrev($name);
+            $reversedCapped = mb_strtoupper($reversed);
+            $capped = mb_strrev($reversedCapped);
+            $dashPadded = "--" . $capped . "--";
+            $xPrefixed = "x" . $dashPadded;
+            $randomPrefix = randPrefix(4);
+            $randPrefixed = $randomPrefix . $xPrefixed;
+            $squareBracketed = "[" . $randomPrefix . "]" . $xPrefixed;
+            $randomCapped = randomCap($squareBracketed);
+            $colorized = colorize($randomCapped);
+
+
+            ?>
+            <ul>
+                <li>Initial input: <?php echo ($name); ?></li>
+                <li>Reversed: <?php echo ($reversed); ?></li>
+                <li>Capitalized: <?php echo ($reversedCapped); ?></li>
+                <li>Re-reversed: <?php echo ($capped); ?></li>
+                <li>Dash-padded: <?php echo ($dashPadded); ?></li>
+                <li>x-prefixed: <?php echo ($xPrefixed); ?></li>
+                <li>Rand-prefixed: <?php echo ($randPrefixed); ?></li>
+                <li>Square-bracketed: <?php echo ($squareBracketed); ?></li>
+                <li>Random-capped: <?php echo ($randomCapped); ?></li>
+                <li>Colorized: <span style="font-size: 2rem;"><?php echo ($colorized); ?></span></li>
+            </ul>
+        <?php
+    }
+    ?>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -38,8 +138,10 @@ session_start();
     <script>
         let button = document.querySelector('button');
         document.querySelector('#aName').addEventListener('keyup', function(e) {
-            if (e.length > 0) {
-                button.toggleAttribute('disabled');
+            if (e.target.value.length > 0) {
+                button.removeAttribute('disabled');
+            } else {
+                button.setAttribute('disabled', 'true');
             }
         });
     </script>
