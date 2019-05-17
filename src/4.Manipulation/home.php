@@ -80,6 +80,9 @@ function is_assoc2(&$array)
             }
             $_SESSION[$member] = $value;
         }
+
+
+        echo ("\n\nCurrent state: \n\n");
         var_dump($_SESSION);
 
         ?>
@@ -99,7 +102,7 @@ function is_assoc2(&$array)
                     echo ("\nRandom key is {$theKey}");
                     echo ("\nRandom item is {$value[$theKey]}\n");
                     $value[$theKey] = $randomValue;
-                } else {
+                } else if (is_object($value)) {
                     $keys = get_object_vars($value);
                     $theKey = $keys[$randomIndex];
                     echo ("\nRandom key is {$theKey}");
@@ -113,7 +116,7 @@ function is_assoc2(&$array)
             }
         }
 
-
+        echo ("\n\nCurrent state: \n\n");
         var_dump($_SESSION);
 
         ?>
