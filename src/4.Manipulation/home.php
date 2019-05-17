@@ -10,33 +10,10 @@ $_SESSION['anObject'] = $anObject;
 
 function is_assoc2(&$array)
 {
+    echo ("\nTesting if associative array ...");
     if (!is_array($array)) return false;
-    $i = count($array);
-    while ($i > 0) {
-        if (!isset($array[--$i])) return true;
-    }
-    return false;
-}
-
-foreach ($_SESSION as $member => $value) {
-    $valueToAdd = "Added by loop";
-    if (is_array($value)) {
-        if (is_assoc2($value)) {
-            $value["AddedByLoop"] = $valueToAdd;
-        } else {
-            array_push($value, $valueToAdd);
-        }
-    } else {
-        $value->addedByLoop = $valueToAdd;
-    }
-}
-
-$randomKey = rand(0, count($anArray));
-echo ("Random key is {$randomKey}");
-if ($randomKey <= count(array_keys($anArray))) {
-    $theKey = array_keys($anArray)[$randomKey];
-    echo (" Random key is {$theKey}");
-    $anArray[$theKey] = "This value was randomly changed";
+    if (count(array_filter(array_keys($array), 'is_string'))) echo ("YES");
+    return count(array_filter(array_keys($array), 'is_string')) > 0;
 }
 
 ?>
@@ -82,12 +59,66 @@ if ($randomKey <= count(array_keys($anArray))) {
             <li>Find a way to print this final object on the homepage, in an easily readable way</li>
         </ol>
 
+        <pre>
+
+        <h2>Iteration 1</h2>
+        <?php
+
+
+        foreach ($_SESSION as $member => $value) {
+            echo ("\nMember: {$member}\n");
+
+            $valueToAdd = "Added by loop";
+            if (is_array($value)) {
+                if (is_assoc2($value)) {
+                    $value["AddedByLoop"] = $valueToAdd;
+                } else {
+                    array_push($value, $valueToAdd);
+                }
+            } else {
+                $value->addedByLoop = $valueToAdd;
+            }
+            $_SESSION[$member] = $value;
+        }
+        var_dump($_SESSION);
+
+        ?>
+
+        <h2>Iteration 2</h2>
 
         <?php
-        echo ("<pre>");
+
+        foreach ($_SESSION as $member => $value) {
+            $randomIndex = rand(0, count($value) * 5);
+            echo ("\nLength of {$member} is " . count($value) . "\nRandom index is {$randomIndex}\n");
+            if ($randomIndex < count(array_keys($value))) {
+                $randomValue = "This value was randomly changed";
+                if (is_array($value)) {
+                    $keys = array_keys($value);
+                    $theKey = $keys[$randomIndex];
+                    echo ("\nRandom key is {$theKey}");
+                    echo ("\nRandom item is {$value[$theKey]}\n");
+                    $value[$theKey] = $randomValue;
+                } else {
+                    $keys = get_object_vars($value);
+                    $theKey = $keys[$randomIndex];
+                    echo ("\nRandom key is {$theKey}");
+                    echo ("\nRandom item is {$value->$theKey}\n");
+                    $value->$theKey = $randomValue;
+                }
+                $_SESSION[$member] = $value;
+                echo ("<pre>" . var_dump($_SESSION) . "</pre>");
+            } else {
+                echo ("Random index larger than length - no change.\n");
+            }
+        }
+
+
         var_dump($_SESSION);
-        echo ("</pre>");
+
         ?>
+
+        </pre>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
