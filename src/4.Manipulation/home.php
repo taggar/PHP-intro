@@ -183,13 +183,9 @@ function status()
         <h2>Iteration 5 (Step 8)</h2>
         <ol start="8">
             <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
-            <li>Loop through the associative array adding all items to the object as <code>key =&gt; value</code></li>
-            <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
-            <li>Find a way to print this final object on the homepage, in an easily readable way</li>
         </ol>
         <pre>
         <?php
-        var_dump($_SESSION["anObject"]);
         $_SESSION["anObject"]->arr1 = $_SESSION["simpleArray"];
         $_SESSION["anObject"]->arr2 = $_SESSION["assocArray"];
 
@@ -217,10 +213,13 @@ function status()
         </ol>
         <pre>
         <?php
-        $_COOKIE["theObject"] = $_SERVER["anObject"];
+        $_COOKIE["theObject"] = $_SESSION["anObject"];
+	echo ("----------- COOKIEDUMP ---------------");
         var_dump($_COOKIE["theObject"]);
+	echo ("----------- COOKIEDUMP ---------------");
+ 
         status();
-        ?>
+       ?>
         </pre>
 
     </div>
