@@ -19,6 +19,12 @@ function is_assoc2(&$array)
     return count(array_filter(array_keys($array), 'is_string')) > 0;
 }
 
+function status()
+{
+    echo ("\n\nCurrent state: \n\n");
+    var_dump($_SESSION);
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,9 +90,7 @@ function is_assoc2(&$array)
             $_SESSION[$member] = $value;
         }
 
-
-        echo ("\n\nCurrent state: \n\n");
-        var_dump($_SESSION);
+        status();
 
         ?>
 
@@ -97,10 +101,13 @@ function is_assoc2(&$array)
         foreach ($_SESSION as $member => $value) {
 
             $randomValue = "This value was randomly changed";
+
             if (is_array($value)) {
                 $arrayLength = count($value);
                 $randomIndex = rand(0, $arrayLength * 5);
+
                 echo ("\nLength of {$member} is " . $arrayLength . "\nRandom index is {$randomIndex}\n");
+
                 if ($randomIndex < $arrayLength) {
                     $keys = array_keys($value);
                     $theKey = $keys[$randomIndex];
@@ -112,18 +119,15 @@ function is_assoc2(&$array)
                     echo ("Random index larger than length - no change.\n");
                 }
             }
-            //} else 
 
             if (is_object($value)) {
-                echo ("------------------------------------");
-                var_dump(array_keys(get_object_vars($value))[0]);
-                echo ("------------------------------------");
                 $objLength = count(get_object_vars($value));
                 $randomIndex = rand(0, $objLength * 5);
+
                 echo ("\nLength of {$member} is " . $objLength . "\nRandom index is {$randomIndex}\n");
+
                 if ($randomIndex < $objLength) {
                     $keys = array_keys(get_object_vars($value));
-                    var_dump("$keys");
                     $theKey = $keys[$randomIndex];
                     echo ("\nRandom key is {$theKey}");
                     echo ("\nRandom item is {$value->$theKey}\n");
@@ -135,11 +139,31 @@ function is_assoc2(&$array)
             }
         }
 
-        echo ("\n\nCurrent state: \n\n");
-        var_dump($_SESSION);
+        status();
 
         ?>
 
+        <h2>Iteration 3 (Step 6)</h2>
+
+        <p>Either array_chunk and keep the first chunk, or array_slice.</p>
+
+        <?php
+        foreach ($_SESSION as $member => $value) {
+
+            if (is_array($value)) {
+                $arrayLength = count($value);
+                $splitPos = floor($arrayLength / 2);
+                if (is_assoc2($value)) {
+                    $value = array_chunk($value, $splitPos, true)[0];
+                } else {
+                    $value = array_slice($value, 0, $splitPos, true);
+                }
+            }
+            $_SESSION[$member] = $value;
+        }
+
+        status();
+        ?>
         </pre>
     </div>
 
