@@ -1,11 +1,14 @@
 <?php
 session_start();
-$anArray = ["Seed"];
+$anArray = ["Seed1", "Seed2", "Seed3", "Seed4"];
 $_SESSION['simpleArray'] = $anArray;
-$anAssocArray = ["Seed" => "Seed"];
+$anAssocArray = ["Seed1" => "Seed1", "Seed2" => "Seed2", "Seed3" => "Seed3", "Seed4" => "Seed4"];
 $_SESSION['assocArray'] = $anAssocArray;
 $anObject = new stdClass();
-$anObject->seed = "Seed";
+$anObject->seed1 = "Seed1";
+$anObject->seed2 = "Seed2";
+$anObject->seed3 = "Seed3";
+$anObject->seed4 = "Seed4";
 $_SESSION['anObject'] = $anObject;
 
 function is_assoc2(&$array)
@@ -61,12 +64,12 @@ function is_assoc2(&$array)
 
         <pre>
 
-        <h2>Iteration 1</h2>
+        <h2>Iteration 1 (Step 3)</h2>
         <?php
 
 
         foreach ($_SESSION as $member => $value) {
-            echo ("\nMember: {$member}\n");
+            echo ("\n\nMember: {$member}");
 
             $valueToAdd = "Added by loop";
             if (is_array($value)) {
@@ -87,32 +90,48 @@ function is_assoc2(&$array)
 
         ?>
 
-        <h2>Iteration 2</h2>
+        <h2>Iteration 2 (Steps 4 and 5)</h2>
 
         <?php
 
         foreach ($_SESSION as $member => $value) {
-            $randomIndex = rand(0, count($value) * 5);
-            echo ("\nLength of {$member} is " . count($value) . "\nRandom index is {$randomIndex}\n");
-            if ($randomIndex < count(array_keys($value))) {
-                $randomValue = "This value was randomly changed";
-                if (is_array($value)) {
+
+            $randomValue = "This value was randomly changed";
+            if (is_array($value)) {
+                $arrayLength = count($value);
+                $randomIndex = rand(0, $arrayLength * 5);
+                echo ("\nLength of {$member} is " . $arrayLength . "\nRandom index is {$randomIndex}\n");
+                if ($randomIndex < $arrayLength) {
                     $keys = array_keys($value);
                     $theKey = $keys[$randomIndex];
                     echo ("\nRandom key is {$theKey}");
                     echo ("\nRandom item is {$value[$theKey]}\n");
                     $value[$theKey] = $randomValue;
-                } else if (is_object($value)) {
-                    $keys = get_object_vars($value);
+                    $_SESSION[$member] = $value;
+                } else {
+                    echo ("Random index larger than length - no change.\n");
+                }
+            }
+            //} else 
+
+            if (is_object($value)) {
+                echo ("------------------------------------");
+                var_dump(array_keys(get_object_vars($value))[0]);
+                echo ("------------------------------------");
+                $objLength = count(get_object_vars($value));
+                $randomIndex = rand(0, $objLength * 5);
+                echo ("\nLength of {$member} is " . $objLength . "\nRandom index is {$randomIndex}\n");
+                if ($randomIndex < $objLength) {
+                    $keys = array_keys(get_object_vars($value));
+                    var_dump("$keys");
                     $theKey = $keys[$randomIndex];
                     echo ("\nRandom key is {$theKey}");
                     echo ("\nRandom item is {$value->$theKey}\n");
                     $value->$theKey = $randomValue;
+                    $_SESSION[$member] = $value;
+                } else {
+                    echo ("Random index larger than length - no change.\n");
                 }
-                $_SESSION[$member] = $value;
-                echo ("<pre>" . var_dump($_SESSION) . "</pre>");
-            } else {
-                echo ("Random index larger than length - no change.\n");
             }
         }
 
