@@ -57,23 +57,16 @@ function status()
                     <li>Object: is an instance of a class. It is simply a specimen of a class and has a memory allocated. Elements in the object can be addressed using the property names as keys. </li>
                 </ul>
             </li>
-            <li>Write a for-loop that adds an item to all of the above.</li>
-            <li>Write an if-statement that has a 20% chance to edit a random item of one of the above.</li>
-            <li>Put this if statement in a loop so every array/object has a random chance of having a random item changed</li>
-            <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
-            <li>Remove the last item of the associative array</li>
-            <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
-            <li>Loop through the associative array adding all items to the object as <code>key =&gt; value</code></li>
-            <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
-            <li>Find a way to print this final object on the homepage, in an easily readable way</li>
+
         </ol>
 
-        <pre>
 
         <h2>Iteration 1 (Step 3)</h2>
+        <ol start="3">
+            <li>Write a for-loop that adds an item to all of the above.</li>
+        </ol>
+        <pre>
         <?php
-
-
         foreach ($_SESSION as $member => $value) {
             echo ("\n\nMember: {$member}");
 
@@ -93,11 +86,16 @@ function status()
         status();
 
         ?>
-
+        </pre>
         <h2>Iteration 2 (Steps 4 and 5)</h2>
 
-        <?php
+        <ol start="4">
+            <li>Write an if-statement that has a 20% chance to edit a random item of one of the above.</li>
+            <li>Put this if statement in a loop so every array/object has a random chance of having a random item changed</li>
+        </ol>
+        <pre>
 
+        <?php
         foreach ($_SESSION as $member => $value) {
 
             $randomValue = "This value was randomly changed";
@@ -142,9 +140,12 @@ function status()
         status();
 
         ?>
-
+        </pre>
         <h2>Iteration 3 (Step 6)</h2>
-
+        <ol start="6">
+            <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
+        </ol>
+        <pre>
         <p>Either array_chunk and keep the first chunk, or array_slice.</p>
 
         <?php
@@ -165,6 +166,63 @@ function status()
         status();
         ?>
         </pre>
+        <h2>Iteration 4 (Step 7)</h2>
+        <ol start="7">
+            <li>Remove the last item of the associative array</li>
+        </ol>
+        <pre>
+        <?php
+        array_pop($_SESSION["assocArray"]);
+
+        status();
+        ?>
+
+        </pre>
+
+        </pre>
+        <h2>Iteration 5 (Step 8)</h2>
+        <ol start="8">
+            <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
+            <li>Loop through the associative array adding all items to the object as <code>key =&gt; value</code></li>
+            <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
+            <li>Find a way to print this final object on the homepage, in an easily readable way</li>
+        </ol>
+        <pre>
+        <?php
+        var_dump($_SESSION["anObject"]);
+        $_SESSION["anObject"]->arr1 = $_SESSION["simpleArray"];
+        $_SESSION["anObject"]->arr2 = $_SESSION["assocArray"];
+
+        status();
+        ?>
+
+        </pre>
+        <h2>Iteration 6 (Step 9)</h2>
+        <ol start="9">
+            <li>Loop through the [original] associative array adding all items to the object as <code>key =&gt; value</code></li>
+        </ol>
+        <pre>
+        <?php
+        foreach ($anAssocArray as $key => $value) {
+            $_SESSION["anObject"]->$key = $value;
+        }
+
+        status();
+        ?>
+        </pre>
+        <h2>Iteration 7 (Steps 10 and 11)</h2>
+        <ol start="10">
+            <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
+            <li>Find a way to print this final object on the homepage, in an easily readable way</li>
+        </ol>
+        <pre>
+        <?php
+        $_COOKIE["theObject"] = $_SERVER["anObject"];
+        var_dump($_COOKIE["theObject"]);
+        status();
+        ?>
+        </pre>
+
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
