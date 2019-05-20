@@ -21,7 +21,7 @@ function is_assoc2(&$array)
 
 function status()
 {
-    echo ("\n\nCurrent state: \n\n");
+    echo ("\n\nCurrent state of " . '$_SESSION' . ": \n\n");
     var_dump($_SESSION);
 }
 
@@ -145,8 +145,8 @@ function status()
         <ol start="6">
             <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
         </ol>
+        <p>Either array_chunk and keep the first chunk, or array_slice. In this exercise the simple array is processed using array_slice, the associative array using array_chunk.</p>
         <pre>
-        <p>Either array_chunk and keep the first chunk, or array_slice.</p>
 
         <?php
         foreach ($_SESSION as $member => $value) {
@@ -214,12 +214,12 @@ function status()
         <pre>
         <?php
         $_COOKIE["theObject"] = $_SESSION["anObject"];
-	echo ("----------- COOKIEDUMP ---------------");
+        echo ("\n----------- START COOKIEDUMP ---------------\n");
         var_dump($_COOKIE["theObject"]);
-	echo ("----------- COOKIEDUMP ---------------");
- 
+        echo ("\n----------- END   COOKIEDUMP ---------------\n");
+
         status();
-       ?>
+        ?>
         </pre>
 
     </div>
