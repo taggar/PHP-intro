@@ -1,4 +1,31 @@
-<?php session_start(); ?>
+<?php  
+
+session_start();
+
+function asTable($object) {
+ print   "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
+            foreach ($object as $key => $value) {
+                print("<tr><td>{$key}</td><td>{$value}</td></tr>");
+            }
+            print "</tbody></table>";   
+}
+
+function asList($object) {
+    foreach ($object as $key => $value) {
+                print "<p>{$key}</p><ul>";
+                $parts = explode(",", $value);
+                foreach ($parts as &$part) {
+                    $trimmed = trim($part, " \'");
+                    print "<li>{$trimmed}</li>";
+                }
+                print("</ul>");
+                // unset($value);
+            }
+}
+
+// FOR DEBUGGING
+//$_SERVER['REQUEST_METHOD']='POST';
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,53 +56,27 @@
         $data_object = new stdClass();
 
         echo   "<h1>" . ' $_POST' .   " </h1>";
-        printValues($_POST);
-        $data_object->postObject = (object)$_POST;
-
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            printValues($_POST);
+            $data_object->postObject = (object)$_POST;
+    
             // output as key value table
-            print   "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
-            foreach ($_POST as $key => $value) {
-                print("<tr><td>{$key}</td><td>{$value}</td></tr>");
-            }
-            print "</tbody></table>";
+            asTable($_POST);
 
             // output as a list
-            foreach ($_POST as $key => $value) {
-                print "<p>{$key}</p><ul>";
-                $parts = explode(",", $value);
-                foreach ($parts as &$part) {
-                    $trimmed = trim($part, " \'");
-                    print "<li>{$trimmed}</li>";
-                }
-                print("</ul>");
-                unset($value);
-            }
+            asList($_POST);
         } else {
             print("No POST request received.\n");
         }
 
         echo "<h1> "  . ' $_GET' . "</h1>";
-        printValues($_GET);
-        $data_object->getObject = (object)$_GET;
-
+        
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
-            print "<table class=\"table\"><thead  class=\"thead-dark\"><tr><th>Key</th><th>Value</th></thead><tbody>";
-            foreach ($_GET as $key => $value) {
-                print("<tr><td>{$key}</td><td>{$value}</td></tr>");
-            }
-            print "</tbody> </table>";
+            printValues($_GET);
+            $data_object->getObject = (object)$_GET;
 
-            foreach ($_GET as $key => $value) {
-                print "<p>{$key}</p><ul>";
-                $parts = explode(" , ", $value);
-                foreach ($parts as $part) {
-                    $trimmed = trim($part, " '");
-                    $trimmed = trim($trimmed, "'");
-                    print "<li>{$trimmed}</li>";
-                }
-                print("</ul>");
-            }
+            asTable($_GET);
+            asList($_GET);
         } else {
             print("No GET request received.\n");
         }
@@ -109,7 +110,7 @@
         print("<h1><a href=\"superdata.php\">" . '$_SESSION' . "</a></h1>");
         printValues($_SESSION);
 
-        // $superglobals = array($_SERVER, $_REQUEST, $_POST, $_GET, $_FILES, $_ENV, $_COOKIE, $_SESSION);
+        // $superglobals = array('$_SERVER', '$_REQUEST', '$_POST', '$_GET', '$_FILES', '$_ENV', '$_COOKIE', '$_SESSION');
 
         // foreach ($superglobals as $key) {
         // printValues($key);

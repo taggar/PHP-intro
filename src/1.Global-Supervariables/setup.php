@@ -1,4 +1,12 @@
-<?php session_start(); ?>
+<?php 
+
+session_start();
+
+showPage();
+
+function showPage() {
+
+    print <<< PAGE
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,7 +22,7 @@
 
     <header>
         <nav class="navbar bg-dark navbar-dark fixed-top">
-            <span class="navbar-brand">PHP Intro: <?php echo $_SERVER['SCRIPT_FILENAME'] ?></span>
+            <span class="navbar-brand">PHP Intro: {$_SERVER['SCRIPT_FILENAME']} </span>
         </nav>
     </header>
 
@@ -22,7 +30,7 @@
 
         <h1>A simple page for a POST and a GET</h1>
 
-        <p>Hello <?php echo $_SESSION['userName'] ?>! </p>
+        <p>Hello {$_SESSION['userName'] }! </p>
 
         <p>This page just needs to allow submitting some form data; one set of data to be sent with GET method, and one with POST method.</p>
 
@@ -47,7 +55,7 @@
                 </form>
 
                 <p>Or just a link with the query, like this:<br>
-                    <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry=" Sweden"&worstMovie="I don't remember what I did last summer" </a></p>
+                    <a href="result.php?favCountry=Sweden&worstMovie=I%20don't%20remember%20what%20I%20did%20last%20summer">result.php?favCountry="Sweden"&worstMovie="I don't remember what I did last summer" </a></p>
 
             </div>
         </div>
@@ -79,3 +87,6 @@
 </body>
 
 </html>
+PAGE;
+}
+?>
