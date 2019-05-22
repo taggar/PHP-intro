@@ -7,12 +7,12 @@ session_unset();
 session_start();
 // class definitions need to be loaded BEFORE session start to avoid __PHP_Incomplete_Class Object
 
-$dealer = new Blackjack();
-$player = new Blackjack();
+$dealer = new Blackjack('Dealer');
+$player = new Blackjack('Player');
 
-$_SESSION['player'] = $player;
-$_SESSION['dealer'] = $dealer;
-$_SESSION['currentplayer'] = 'player';
+$_SESSION['Player'] = $player;
+$_SESSION['Dealer'] = $dealer;
+$_SESSION['currentplayer'] = 'Player';
 
 showPage();
 

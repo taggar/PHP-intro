@@ -1,12 +1,16 @@
 <?php 
   class Blackjack {
 
+    private $name;
     private $score;
     private $state;
 
-    public function __construct() {
+    public function __construct($theName) {
+        $this->name = $theName;
         $this->score = 0; 
         $this->state = "exists";
+        // deal 1 card
+        $this->hit();
     }
     
     public function Hit() {
@@ -37,8 +41,20 @@
 
     public function Surrender() {
         // should make you surrender the game. (Dealer wins.)
-        $this->state = 'abandon';
+        $this->state = 'surrender';
         return;
+    }
+
+    public function getScore() {
+        return $this->score;
+    }
+
+    public function getState() {
+        return $this->state;
+    }
+
+    public function getName() {
+        return $this->name;
     }
  }
 

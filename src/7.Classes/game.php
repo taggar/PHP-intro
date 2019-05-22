@@ -32,33 +32,35 @@ $currentPlayer = $_SESSION['currentplayer'];
 
         <h1><?php echo ($title); ?></h1>
 
-        <p>Current player: <?php echo $_SESSION['currentplayer']; ?></p>
+ 
 
-        <div class="row w-75 m-auto">
+        <div class="row w-100    m-auto">
 
-            <div class="col-sm card mr-5 p-3">
+            <div class="col-sm m-3 p-3">
                 <form method="post" action="home.php">
-                    <button type="submit"  name="home" class="btn btn-primary m-auto">Back home</button>
+                    <button type="submit"  name="home" class="btn btn-secondary m-auto">Back home</button>
                 </form>
             </div>
-            <div class="col-sm card mr-5 p-3">
+            <!--             
+            <div class="col-sm m-3 p-3">
                 <form method="post" action="game.php">
-                    <button type="submit"  name="destroy_session" class="btn btn-primary m-auto">Destroy session</button>
+                    <button type="submit"  name="destroy_session" class="btn btn-danger m-auto">Destroy session</button>
                 </form>
-            </div>
-            <div class="col-sm card mr-5 p-3">
+            </div> 
+            -->
+            <div class="col-sm m-3 p-3">
                 <form method="post">
                     <button type="submit"  name="hit" class="btn btn-primary m-auto">Hit</button>
                 </form>
             </div>
-            <div class="col-sm card mr-5 p-3">
+            <div class="col-sm m-3 p-3">
                 <form method="post" action="game.php">
-                    <button type="submit" name="stand" class="btn btn-primary m-auto">Stand ...</button>
+                    <button type="submit" name="stand" class="btn btn-warning m-auto">Stand ...</button>
                 </form>
             </div>
-            <div class="col-sm card p-3">
+            <div class="col-sm m-3 p-3">
                 <form  method="post" action="game.php">
-                    <button type="submit" name="surrender" class="btn btn-primary m-auto">Surrender!</button>
+                    <button type="submit" name="surrender" class="btn btn-warning m-auto">Surrender!</button>
                 </form>
             </div>
 
@@ -78,18 +80,57 @@ $currentPlayer = $_SESSION['currentplayer'];
         }
         if (isset($_POST['stand'])) {
             $_SESSION[$currentPlayer]->Stand();
-            $_SESSION['currentplayer'] = 'dealer';
+            $_SESSION['currentplayer'] = 'Dealer';
         }
-
+        
         if (isset($_POST['surrender'])) {
             $_SESSION[$currentPlayer]->Surrender();
-            $_SESSION['currentplayer'] = 'dealer';
+            $_SESSION['currentplayer'] = 'Dealer';
         }
     }
     
+    ?>
+
+        <p>Current player: <?php echo $_SESSION['currentplayer']; ?></p>
+
+        <div class="row w-75 m-auto">
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th></th>    
+                    <th scope="col">Player</th>
+                    <th scope="col">Dealer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                    <th scope="row">Score</th>
+                    <td><?php echo ($_SESSION['Player']->getScore()); ?></td>
+                    <td><?php echo ($_SESSION['Dealer']->getScore()); ?></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">State</th>
+                    <td><?php echo ($_SESSION['Player']->getState()); ?></td>
+                    <td><?php echo ($_SESSION['Dealer']->getState()); ?></td>
+                    </tr>
+                    <tr>
+                    <th scope="row">Position</th>
+                    <td><?php echo (checkPosition('Player')); ?></td>
+                    <td><?php echo (checkPosition('Dealer')); ?></td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+<?php
+  
+    // checkPositions();
+
     status(); 
     
-    ?>
+?>
 
 
     </div>
