@@ -86,6 +86,12 @@ $currentPlayer = $_SESSION['currentplayer'];
         if (isset($_POST['surrender'])) {
             $_SESSION[$currentPlayer]->Surrender();
             $_SESSION['currentplayer'] = 'Dealer';
+
+            $dealerScore = $_SESSION['Dealer']->getScore();
+            while ($dealerScore < 15) {
+               $_SESSION['Dealer']->Hit();
+               $dealerScore = $_SESSION['Dealer']->getScore();
+            }
         }
     }
     

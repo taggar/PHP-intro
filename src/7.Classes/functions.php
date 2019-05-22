@@ -52,8 +52,7 @@ function checkPositions() {
  function checkPosition($playerName) {
 
     $playerState = $_SESSION[$playerName]->getState();
-    $playerScore = $_SESSION[$playerName]->getScore();
-
+ 
     if ($playerState == 'bust' || $playerState == 'surrender') {
         return ($playerName . " lost ... ");
     } else {
