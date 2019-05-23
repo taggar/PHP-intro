@@ -21,8 +21,8 @@ function nickname_generate($seed)
 function object_generate()
 {
     // Create stuff
-    $anArray = ["Seed1", "Seed2", "Seed3", "Seed4"];
-    $anAssocArray = ["AASeed1" => "Seed1", "AASeed2" => "Seed2", "AASeed3" => "Seed3", "AASeed4" => "Seed4"];
+    $anArray = ['Seed1", "Seed2", "Seed3", "Seed4'];
+    $anAssocArray = ['AASeed1" => "Seed1", "AASeed2" => "Seed2", "AASeed3" => "Seed3", "AASeed4" => "Seed4'];
     $anObject = new stdClass();
     $anObject->seed1 = "Seed1";
     $anObject->seed2 = "Seed2";
@@ -33,11 +33,20 @@ function object_generate()
     }
     $anObject->arr1 = $anArray;
     $anObject->arr2 = $anAssocArray;
-    $_SESSION["theObject"] = $anObject;
+    $_SESSION['theObject'] = $anObject;
     return $anObject;
 }
 
 // object_revert(), this function should either take the object from the previous function (object_generate()) if it's passed to it as a parameter or create the object at the start if it wasn't passed
+
+// You cannot overload PHP functions. Function signatures are based only on their names and do not include argument 
+// lists, so you cannot have two functions with the same name. Class method overloading is different in PHP than in 
+// many other languages. PHP uses the same word but it describes a different pattern.
+
+// function object_revert() {
+//     $object = object_generate();
+//     object_revert($object);
+// }
 
 function object_revert($object)
 {
