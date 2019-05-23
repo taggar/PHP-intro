@@ -17,6 +17,10 @@ function is_assoc2(&$array)
     if (!is_array($array)) return false;
     if (count(array_filter(array_keys($array), 'is_string'))) echo ("YES");
     return count(array_filter(array_keys($array), 'is_string')) > 0;
+
+    // alternative method of determining array nature:
+    // https://blog-en.openalfa.com/how-to-check-if-a-php-array-is-associative-or-sequential
+    // return array_keys($arr) !== range(0, count($arr) - 1);
 }
 
 function status()
