@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <h1>PHP running on docker</h1>
     <?php phpinfo(); ?>
 </body>
 
