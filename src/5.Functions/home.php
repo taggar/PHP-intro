@@ -4,13 +4,23 @@ session_start();
 require 'security.php';
 include 'functions.php';
 
-if ($_REQUEST['answer'] == 'ammaBot') {
-    echo (nickname_generate('ammaBot'));
-} else if ($_REQUEST['answer'] == 'notaBot' || isset($_REQUEST['nicknameSeed']) || isset($_REQUEST['destroy_session']) || isset($_REQUEST['generate_object']) || isset($_REQUEST['revert_object'])) {
-    showPage();
+if (isset($_REQUEST['answer']) 
+        || isset($_REQUEST['nicknameSeed']) 
+        || isset($_REQUEST['destroy_session']) 
+        || isset($_REQUEST['generate_object']) 
+        || isset($_REQUEST['revert_object'])) {
+
+    if ($_REQUEST['answer'] == 'ammaBot') {
+        echo (nickname_generate('ammaBot'));
+    } else  {
+        // if ($_REQUEST['answer'] == 'notaBot' || isset($_REQUEST['nicknameSeed']) || isset($_REQUEST['destroy_session']) 
+        // || isset($_REQUEST['generate_object']) || isset($_REQUEST['revert_object']))
+        showPage();
+    } 
 } else {
-     showSecurityPage();
+    showSecurityPage();
 }
+
 
 function handleClick() {
         if (isset($_REQUEST['nicknameSeed'])) {

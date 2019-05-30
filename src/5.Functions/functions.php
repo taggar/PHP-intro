@@ -52,14 +52,15 @@ function object_revert($object)
 {
     if ($object == null) {
         $object = object_generate();
-
     }
+
     $revertedArray = [];
 
     foreach ($object->arr2 as $key => $value) {
         // echo ("{$key}, {$value}");
         $revertedArray[$key] = $value;
     }
+
     return $revertedArray;
 }
 
