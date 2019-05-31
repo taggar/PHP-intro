@@ -25,8 +25,11 @@ function is_assoc2(&$array)
 
 function status()
 {
-    echo ("\n\nCurrent state of " . '$_SESSION' . ": \n\n");
+    echo (" \n\nCurrent state of " . '$_SESSION' . ": \n\n<pre>");
+    echo ("\n----------------------------------------------------\n");
     var_dump($_SESSION);
+    echo ("\n----------------------------------------------------\n");
+    echo ("</pre>");
 }
 
 ?>
@@ -69,7 +72,7 @@ function status()
         <ol start="3">
             <li>Write a for-loop that adds an item to all of the above.</li>
         </ol>
-        <pre>
+
         <?php
         foreach ($_SESSION as $member => $value) {
             echo ("\n\nMember: {$member}");
@@ -90,14 +93,14 @@ function status()
         status();
 
         ?>
-        </pre>
+
         <h2>Iteration 2 (Steps 4 and 5)</h2>
 
         <ol start="4">
             <li>Write an if-statement that has a 20% chance to edit a random item of one of the above.</li>
             <li>Put this if statement in a loop so every array/object has a random chance of having a random item changed</li>
         </ol>
-        <pre>
+
 
         <?php
         foreach ($_SESSION as $member => $value) {
@@ -144,13 +147,13 @@ function status()
         status();
 
         ?>
-        </pre>
+
         <h2>Iteration 3 (Step 6)</h2>
         <ol start="6">
             <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
         </ol>
         <p>Either array_chunk and keep the first chunk, or array_slice. In this exercise the simple array is processed using array_slice, the associative array using array_chunk.</p>
-        <pre>
+
 
         <?php
         foreach ($_SESSION as $member => $value) {
@@ -169,26 +172,26 @@ function status()
 
         status();
         ?>
-        </pre>
+
         <h2>Iteration 4 (Step 7)</h2>
         <ol start="7">
             <li>Remove the last item of the associative array</li>
         </ol>
-        <pre>
+
         <?php
         array_pop($_SESSION["assocArray"]);
 
         status();
         ?>
 
-        </pre>
 
-        </pre>
+
+
         <h2>Iteration 5 (Step 8)</h2>
         <ol start="8">
             <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
         </ol>
-        <pre>
+
         <?php
         $_SESSION["anObject"]->arr1 = $_SESSION["simpleArray"];
         $_SESSION["anObject"]->arr2 = $_SESSION["assocArray"];
@@ -196,12 +199,12 @@ function status()
         status();
         ?>
 
-        </pre>
+
         <h2>Iteration 6 (Step 9)</h2>
         <ol start="9">
             <li>Loop through the [original] associative array adding all items to the object as <code>key =&gt; value</code></li>
         </ol>
-        <pre>
+
         <?php
         foreach ($anAssocArray as $key => $value) {
             $_SESSION["anObject"]->$key = $value;
@@ -209,13 +212,13 @@ function status()
 
         status();
         ?>
-        </pre>
+
         <h2>Iteration 7 (Steps 10 and 11)</h2>
         <ol start="10">
             <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
             <li>Find a way to print this final object on the homepage, in an easily readable way</li>
         </ol>
-        <pre>
+
         <?php
         $_COOKIE["theObject"] = $_SESSION["anObject"];
         echo ("\n----------- START COOKIEDUMP ---------------\n");
@@ -224,7 +227,7 @@ function status()
 
         status();
         ?>
-        </pre>
+
 
     </div>
 
