@@ -40,6 +40,9 @@ function handleClick() {
         }
 
         if (isset($_REQUEST['revert_object'])) {
+            if (!isset($_SESSION['theObject'])) {
+                object_generate();
+            }
             $reverted = object_revert($_SESSION['theObject']);
             echo ("<pre>");
             print_r ($reverted);

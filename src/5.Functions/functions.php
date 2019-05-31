@@ -21,8 +21,8 @@ function nickname_generate($seed)
 function object_generate()
 {
     // Create stuff
-    $anArray = ['Seed1", "Seed2", "Seed3", "Seed4'];
-    $anAssocArray = ['AASeed1" => "Seed1", "AASeed2" => "Seed2", "AASeed3" => "Seed3", "AASeed4" => "Seed4'];
+    $anArray = ["Seed1", "Seed2", "Seed3", "Seed4"];
+    $anAssocArray = ["AASeed1" => "Seed1", "AASeed2" => "Seed2", "AASeed3" => "Seed3", "AASeed4" => "Seed4"];
     $anObject = new stdClass();
     $anObject->seed1 = "Seed1";
     $anObject->seed2 = "Seed2";
@@ -33,6 +33,8 @@ function object_generate()
     }
     $anObject->arr1 = $anArray;
     $anObject->arr2 = $anAssocArray;
+    $anObject->arr1P1 = array_slice($anArray, 0, floor(count($anArray) / 2), true);
+    $anObject->arr1P2 = array_slice($anArray, floor(count($anArray) / 2), null , true);
     $_SESSION['theObject'] = $anObject;
     return $anObject;
 }
