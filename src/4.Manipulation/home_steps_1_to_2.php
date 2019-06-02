@@ -1,7 +1,5 @@
 <?php
 
-session_start();
-
 $anArray = ["Seed1", "Seed2", "Seed3", "Seed4"];
 $_SESSION['simpleArray'] = $anArray;
 
@@ -15,4 +13,5 @@ $anObject->seed3 = "Seed3";
 $anObject->seed4 = "Seed4";
 $_SESSION['anObject'] = $anObject;
 
+status();
 ?>

@@ -1,6 +1,9 @@
 <?php
-session_unset();
-require_once('home_steps_1_to_2.php');
+session_destroy();
+session_start();
+
+// Unset all previously stored $_SESSION members 
+$_SESSION = [];
 
 function is_assoc2(&$array)
 {
@@ -29,7 +32,22 @@ function status()
     echo ("</pre>");
 }
 
+function  showIteration($iteration) {
+    
+    echo ("<h3>Code</h3>");
+    echo ("<pre class='language-php line-numbers'><code>");
+    
+    print(htmlspecialchars(file_get_contents($iteration)));
+    
+    echo ("</code></pre>");
+
+    echo("<h3>Result</h3>");
+    
+    require_once($iteration);
+    
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,9 +68,18 @@ function status()
         </nav>
     </header>
 
+    <!--  
+
+    --------------------------------------------------- Steps 1 and 2 ---------------------------------------------------
+
+    -->
+
     <div class="container-fluid mt-3 pt-5">
 
         <h1>Object Manipulation</h1>
+
+            <h2>Initialization</h2>
+
             <ol>
                 <li>Create an array, an associative array and an object in <code>home.php</code>.</li>
                 <li>What are the differences between an array, an associative array and an object?
@@ -64,171 +91,125 @@ function status()
                 </li>
             </ol>
 
-            <h3>Code</h3>
-        <pre class="language-php line-numbers"><code>
-<?php
-    print(htmlspecialchars(file_get_contents('home_steps_1_to_2.php')));
-?>
-        </code></pre>
+            <?php
+                showIteration('home_steps_1_to_2.php');
+            ?>
+ 
+ <!--  
 
-        <h3>Result</h3>
-<?php
-    status();
-?>
+    --------------------------------------------------- Step 3 ---------------------------------------------------
+
+    -->
 
             <h2>Iteration 1 (Step 3)</h2>
-                <ol start="3">
-                    <li>Write a for-loop that adds an item to all of the above.</li>
-                </ol>
 
-                <h3>Code</h3>
-        <pre class="language-php line-numbers"><code>
-<?php
-    print(htmlspecialchars(file_get_contents('home_steps_3.php')));
-?>
-        </code></pre>
+            <ol start="3">
+                <li>Write a for-loop that adds an item to all of the above.</li>
+            </ol>
 
-           <h3>Result</h3>
-<?php
-    require_once 'home_steps_3.php';
-?>
+            <?php
+                showIteration('home_steps_3.php');
+            ?>
 
-        <h2>Iteration 2 (Steps 4 and 5)</h2>
+    <!--  
 
-        <ol start="4">
-            <li>Write an if-statement that has a 20% chance to edit a random item of one of the above.</li>
-            <li>Put this if statement in a loop so every array/object has a random chance of having a random item changed</li>
-        </ol>
+    --------------------------------------------------- Steps 4 and 5 ---------------------------------------------------
 
+    -->
 
-        <?php
-foreach ($_SESSION as $member => $value) {
+            <h2>Iteration 2 (Steps 4 and 5)</h2>
 
-    $randomValue = "This value was randomly changed";
+            <ol start="4">
+                <li>Write an if-statement that has a 20% chance to edit a random item of one of the above.</li>
+                <li>Put this if statement in a loop so every array/object has a random chance of having a random item changed</li>
+            </ol>
 
-    if (is_array($value)) {
-        $arrayLength = count($value);
-        $randomIndex = rand(0, $arrayLength * 5);
+            <?php
+                showIteration('home_steps_4_to_5.php');
+            ?>
+                  
+    <!--  
 
-        echo ("\nLength of {$member} is " . $arrayLength . "\nRandom index is {$randomIndex}\n");
+    --------------------------------------------------- Step 6 ---------------------------------------------------
 
-        if ($randomIndex < $arrayLength) {
-            $keys = array_keys($value);
-            $theKey = $keys[$randomIndex];
-            echo ("\nRandom key is {$theKey}");
-            echo ("\nRandom item is {$value[$theKey]}\n");
-            $value[$theKey] = $randomValue;
-            $_SESSION[$member] = $value;
-        } else {
-            echo ("Random index larger than length - no change.\n");
-        }
-    }
+    -->
 
-    if (is_object($value)) {
-        $objLength = count(get_object_vars($value));
-        $randomIndex = rand(0, $objLength * 5);
+            <h2>Iteration 3 (Step 6)</h2>
 
-        echo ("\nLength of {$member} is " . $objLength . "\nRandom index is {$randomIndex}\n");
+            <ol start="6">
+                <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
+            </ol>
 
-        if ($randomIndex < $objLength) {
-            $keys = array_keys(get_object_vars($value));
-            $theKey = $keys[$randomIndex];
-            echo ("\nRandom key is {$theKey}");
-            echo ("\nRandom item is {$value->$theKey}\n");
-            $value->$theKey = $randomValue;
-            $_SESSION[$member] = $value;
-        } else {
-            echo ("Random index larger than length - no change.\n");
-        }
-    }
-}
+            <p>Either array_chunk and keep the first chunk, or array_slice. In this exercise the simple array is processed using array_slice, the associative array using array_chunk.</p>
 
-status();
+            <?php
+                showIteration('home_steps_6.php');
+            ?>
 
-?>
+    <!--  
 
-        <h2>Iteration 3 (Step 6)</h2>
-        <ol start="6">
-            <li>Divide the array in half (if uneven items half-1, unless half-1 makes it empty)</li>
-        </ol>
-        <p>Either array_chunk and keep the first chunk, or array_slice. In this exercise the simple array is processed using array_slice, the associative array using array_chunk.</p>
+    --------------------------------------------------- Step 7 ---------------------------------------------------
 
+    -->
 
-        <?php
-foreach ($_SESSION as $member => $value) {
+            <h2>Iteration 4 (Step 7)</h2>
 
-    if (is_array($value)) {
-        $arrayLength = count($value);
-        $splitPos = floor($arrayLength / 2);
-        if (is_assoc2($value)) {
-            $value = array_chunk($value, $splitPos, true)[0];
-        } else {
-            $value = array_slice($value, 0, $splitPos, true);
-        }
-    }
-    $_SESSION[$member] = $value;
-}
+            <ol start="7">
+                <li>Remove the last item of the associative array</li>
+            </ol>
 
-status();
-?>
+            <?php
+                showIteration('home_steps_7.php');
+            ?>
 
-        <h2>Iteration 4 (Step 7)</h2>
-        <ol start="7">
-            <li>Remove the last item of the associative array</li>
-        </ol>
+        <!--  
 
-        <?php
-array_pop($_SESSION["assocArray"]);
+    --------------------------------------------------- Step 8 ---------------------------------------------------
 
-status();
-?>
+    -->
 
+            <h2>Iteration 5 (Step 8)</h2>
 
+            <ol start="8">
+                <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
+            </ol>
 
+            <?php
+                showIteration('home_steps_8.php');
+            ?>
 
-        <h2>Iteration 5 (Step 8)</h2>
-        <ol start="8">
-            <li>Add the arrays to the object as <code>arr1</code> and <code>arr2</code></li>
-        </ol>
+    <!--  
 
-        <?php
-$_SESSION["anObject"]->arr1 = $_SESSION["simpleArray"];
-$_SESSION["anObject"]->arr2 = $_SESSION["assocArray"];
+    --------------------------------------------------- Step9 ---------------------------------------------------
 
-status();
-?>
+    -->
 
+            <h2>Iteration 6 (Step 9)</h2>
 
-        <h2>Iteration 6 (Step 9)</h2>
-        <ol start="9">
-            <li>Loop through the [original] associative array adding all items to the object as <code>key =&gt; value</code></li>
-        </ol>
+            <ol start="9">
+                <li>Loop through the [original] associative array adding all items to the object as <code>key =&gt; value</code></li>
+            </ol>
 
-        <?php
-foreach ($anAssocArray as $key => $value) {
-    $_SESSION["anObject"]->$key = $value;
-}
+            <?php
+                showIteration('home_steps_9.php');
+            ?>
 
-status();
-?>
+    <!--  
 
-        <h2>Iteration 7 (Steps 10 and 11)</h2>
-        <ol start="10">
-            <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
-            <li>Find a way to print this final object on the homepage, in an easily readable way</li>
-        </ol>
+    --------------------------------------------------- Steps 10 and 11 ---------------------------------------------------
 
-        <?php
-$_COOKIE["theObject"] = $_SESSION["anObject"];
+    -->
 
-echo ("<pre>\n----------- START COOKIEDUMP ---------------\n");
-var_dump($_COOKIE["theObject"]);
-echo ("\n----------- END   COOKIEDUMP ---------------\n</pre>");
+            <h2>Iteration 7 (Steps 10 and 11)</h2>
 
-status();
-?>
+            <ol start="10">
+                <li>Save the object in the <code>$_COOKIE</code> superglobal</li>
+                <li>Find a way to print this final object on the homepage, in an easily readable way</li>
+            </ol>
 
-
+            <?php
+                showIteration('home_steps_10_to_11.php');
+            ?>
 
     </div>
 
