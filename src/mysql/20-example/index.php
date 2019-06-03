@@ -10,7 +10,7 @@
  $databaseHost = "localhost";
  $databaseName = "stackoverflow";
  $databaseUser = "stackuser";
- $databasePassword = "stackpass";
+ $databasePassword = "dbuser";
 
  $pdo = new PDO("mysql:host=" . $databaseHost . ";dbname=" . $databaseName, $databaseUser, $databasePassword);
  $pdo->exec("SET CHARACTER SET utf8");
