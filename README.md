@@ -1,3 +1,5 @@
+Text taken from the original assignments. 
+
 # PHP-Intro
 
 ## Introduction
